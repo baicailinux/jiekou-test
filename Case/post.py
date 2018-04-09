@@ -8,7 +8,7 @@ reques = reques()
 
 class Test_tuling(unittest.TestCase):
     def setUp(self):
-        self.data_file = open(r"./data/data.yaml", "r", encoding="utf-8")
+        self.data_file = open(r".\data\data.yaml", "r", encoding="utf-8")
         self.data = yaml.load(self.data_file)
         self.post_data = self.data['post']
 

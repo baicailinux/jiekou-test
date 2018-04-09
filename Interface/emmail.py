@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 def load_emil_setting():  # 从配置文件中加载获取email的相关信息
     import yaml
     # data_file = open(r"./Data/email.yaml", "r")
-    data_file = open(r"/Users/baicai/mytest/jiekou-python3/Data/email.yaml", "r")
+    data_file = open(r"F:\jiekou-test\Data\email.yaml", "r")
     datas = yaml.load(data_file)
     data_file.close()
     return (
@@ -28,7 +28,7 @@ def sendemali(filepath):  # 发送email
     msg['Date'] = time.strftime('%a, %d %b %Y %H:%M:%S %z')
     att = MIMEText(open(r'%s' % filepath, 'rb').read(), 'base64', 'utf-8')
     att["Content-Type"] = 'application/octet-stream'
-    att["Content-Disposition"] = 'attachment; filename="pyresult.html"'
+    att["Content-Disposition"] = 'attachment; filename="result.html"'
     txt = MIMEText("这是测试报告的邮件，详情见附件", 'plain', 'gb2312')
     msg.attach(txt)
     msg.attach(att)

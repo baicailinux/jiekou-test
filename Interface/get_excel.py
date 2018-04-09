@@ -11,7 +11,7 @@ from Interface.feng import reques
 
 
 def datacel():
-    filepath = './Data/Data.xlsx'
+    filepath = '.\\Data\\Data.xlsx'
     file = xlrd.open_workbook(filepath)
     me = file.sheets()[0]
     nrows = me.nrows
