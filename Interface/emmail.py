@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # @Author  : leizi
-import smtplib, time, os
+import smtplib, time, os, re
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -26,9 +26,12 @@ def sendemali(filepath):  # 发送email
     msg['From'] = '白菜接口自动化测试平台'
     msg['To'] = mail_to
     msg['Date'] = time.strftime('%a, %d %b %Y %H:%M:%S %z')
-    att = MIMEText(open(r'%s' % filepath, 'rb').read(), 'base64', 'utf-8')
+    att = MIMEText(open(r'%s' % filepath[0], 'rb').read(), 'base64', 'utf-8')
     att["Content-Type"] = 'application/octet-stream'
-    att["Content-Disposition"] = 'attachment; filename="result.html"'
+    if filepath[1] == '.xls':
+        att["Content-Disposition"] = 'attachment; filename="result.xls"'
+    else:
+        att["Content-Disposition"] = 'attachment; filename="result.html"'
     txt = MIMEText("这是测试报告的邮件，详情见附件", 'plain', 'gb2312')
     msg.attach(txt)
     msg.attach(att)
@@ -37,7 +40,6 @@ def sendemali(filepath):  # 发送email
     server.login(from_addr, password)
     server.sendmail(from_addr, mail_to, msg.as_string())
     server.quit()
-    print("----邮件发送成功----")
 
 
 if __name__ == '__main__':
